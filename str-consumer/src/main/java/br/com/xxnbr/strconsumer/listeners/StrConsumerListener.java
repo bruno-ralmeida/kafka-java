@@ -5,15 +5,19 @@ import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Component;
 
 import br.com.xxnbr.strconsumer.custom.StrConsumerCustomListener;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Component
 public class StrConsumerListener {
 
+  @SneakyThrows
   @StrConsumerCustomListener(groupId = "group-1")
   public void listenerPartition0(String message) {
+
     log.info("CUSTOM LISTENER ::: MESSAGE = {}", message);
+    throw new IllegalArgumentException("ERROR...");
   }
 
   @StrConsumerCustomListener(groupId = "group-1")
