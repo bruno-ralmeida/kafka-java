@@ -1,5 +1,7 @@
 package br.com.xxnbr.strconsumer.listeners;
 
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Component;
 
 import br.com.xxnbr.strconsumer.custom.StrConsumerCustomListener;
@@ -11,16 +13,15 @@ public class StrConsumerListener {
 
   @StrConsumerCustomListener(groupId = "group-1")
   public void listenerPartition0(String message) {
-    log.info("PARTITION 0 ::: MESSAGE = {}", message);
+    log.info("CUSTOM LISTENER ::: MESSAGE = {}", message);
   }
 
   @StrConsumerCustomListener(groupId = "group-1")
-
   public void listenerPartition1(String message) {
-    log.info("PARTITION 1 ::: MESSAGE = {}", message);
+    log.info("OTHER CUSTOM LISTENER ::: MESSAGE = {}", message);
   }
 
-  @StrConsumerCustomListener(groupId = "group-2")
+  @KafkaListener(groupId = "group-2", topics = "str-topic", containerFactory = "validMessageContainerFactory")
   public void listenerLog(String message) {
     log.info("LOG ::: MESSAGE = {}", message);
   }
