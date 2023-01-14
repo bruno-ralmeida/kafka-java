@@ -15,6 +15,7 @@ public class StrConsumerListener {
   @SneakyThrows
   @StrConsumerCustomListener(groupId = "group-1")
   public void listenerPartition0(String message) {
+
     log.info("CUSTOM LISTENER ::: MESSAGE = {}", message);
     throw new IllegalArgumentException("ERROR...");
   }
